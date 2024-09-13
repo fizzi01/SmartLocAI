@@ -19,7 +19,7 @@ L'architettura del sistema è modulare e comprende i seguenti componenti chiave:
 - **CTGAN**: Basato su architettura **Generative Adversarial Network**, viene utilizzato per generare dati sintetici da dataset reali, ampliando i dati disponibili per migliorare le performance dei modelli di localizzazione.
 - **K-Means e KNN**: Algoritmi utilizzati per il clustering e la classificazione dei dati. K-Means organizza i dati in cluster, mentre KNN viene utilizzato per stimare la posizione dei dispositivi.
 
-## b) Repositori dei Componenti
+## b) Repositories dei Componenti
 
 - **SmartLocAI Mobile App**: [Link al repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-SmartLocAI_APP-IzziBarone.git)
 - **DataService API**: [Link al repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-DataService-IzziBarone.git)
