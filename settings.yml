@@ -1,0 +1,24 @@
+credentials:
+  usernames:
+    bajaji:
+      email: federico.izzi@studenti.unisalento.it
+      name: Federico
+      password: $2b$12$YI4bf*****
+cookie:
+  expiry_days: 30
+  key: $2b$12$iIoH*****
+  name: $2b$12$32biUx72*****
+preauthorized:
+  emails:
+  - federico.izzi@studenti.unisalento.it
+api:
+  data: http://****:8087/data
+  test_data: http://****:8087/data/test
+  models_upload: http://****:8087/models/upload
+  login: http://*****:8087/login
+save_dirs:
+  data: "data"
+  models: "models"
+  knn: "knn"
+  kmeans: "kmeans"
+  ctgan: "ctgan"

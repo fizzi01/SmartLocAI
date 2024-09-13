@@ -1,0 +1,14 @@
+services:
+  indoorapp:
+    build: .
+    ports:
+      - "8083:8501"
+    volumes:
+      - ./core:/app/core
+      - ./data:/app/data
+      - ./pages:/app/pages
+      - ./models:/app/models
+      - ./settings.yml:/app/settings.yml
+      - ./Home.py:/app/Home.py
+    environment:
+      - PYTHONUNBUFFERED=1
