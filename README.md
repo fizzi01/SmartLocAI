@@ -51,7 +51,42 @@ La **Processing Dashboard** è il cuore operativo della soluzione, integrando e 
    git clone https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-Dashboard-IzziBarone.git
    ```
 
-2. Installa le dipendenze:
+2. Settings.yml:
+   ```yml
+   credentials:
+     usernames:
+       [USERNAME]:
+         email: ...
+         name: ...
+         password: [HASHED_PASSWORD]
+   cookie:
+     expiry_days: 30
+     key: [HASHED_KEY]
+     name: [HASHED_NAME]
+   preauthorized:
+     emails:
+     - [EMAILS]
+   api:
+     data: http://****:8087/data
+     test_data: http://****:8087/data/test
+     models_upload: http://****:8087/models/upload
+     login: http://*****:8087/login
+   save_dirs:
+     data: "data"
+     models: "models"
+     knn: "knn"
+     kmeans: "kmeans"
+     ctgan: "ctgan"
+   ```
+3. Generazione credenziali e chiavi:
+   ```python
+   import streamlit_authenticator as stauth
+
+   hashed_passwords = stauth.Hasher(["......."]).generate()
+   print(hashed_passwords)
+   ```
+
+5. Installa le dipendenze:
    ```bash
    docker compose up -d
    ```
