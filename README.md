@@ -1,38 +1,50 @@
-
-# Processing Dashboard
+# SmartLocAI - Processing Dashboard
 
 ## Overview
 
-La **Processing Dashboard**, sviluppata in **Streamlit**, è uno strumento avanzato per la localizzazione indoor basata su **Wi-Fi** e **Bluetooth Low Energy (BLE)**. Questa applicazione facilita l'elaborazione dei dati e il miglioramento della precisione di localizzazione sfruttando Generative AI e ML.
-
 ![workflow](https://drive.google.com/uc?export=view&id=1X_hAKv6Gfx64jVT-aF3GQcP7hRWn_DOr)
 
+La **Processing Dashboard** è una piattaforma interattiva sviluppata con **Streamlit** che gestisce l'intero flusso di lavoro per la localizzazione indoor, dall'acquisizione e preprocessamento dei dati RSSI, all'addestramento di modelli di machine learning fino alla predizione della posizione dei dispositivi mobili. Questa soluzione sfrutta tecniche avanzate come la **Generative AI**, il **clustering K-Means**, il **K-Nearest Neighbors (KNN)** e la **trilaterazione** per ottenere stime accurate della posizione basate su segnali Wi-Fi e BLE.
 
+## a) Architettura del Sistema
 
-### Caratteristiche Principali
+![architettura](https://drive.google.com/uc?export=view&id=13Cb9Iq9cTK-zhTe3yJ_fPGRLT2n5gV35)
 
-1. **Generazione di Dati Sintetici con CTGAN**:
-   - Utilizzo di **CTGAN** per la generazione di dati sintetici, in modo da aumentare artificialmente la quantità e la qualità dei dati raccolti nel mondo reale. Questa componente è fondamentale per migliorare l'efficacia dei modelli di localizzazione in presenza di dataset limitati o sbilanciati.
+L'architettura del sistema è modulare e comprende i seguenti componenti chiave:
 
-2. **Processing dei Dati**:
-   - Raccolta dei dati RSSI da **access points** Wi-Fi e **beacon BLE** per identificare la posizione dei dispositivi mobili. Il sistema include il **preprocessing dei dati**, come pulizia, normalizzazione e etichettatura dei **Reference Points (RP)** per una corretta elaborazione successiva.
+- **App Mobile SmartLocAI**: Raccoglie dati RSSI da access points Wi-Fi e beacon BLE tramite dispositivi mobili. Invia i dati al **DataService API** per l'elaborazione.
+- **DataService API**: Gestisce la raccolta, l'archiviazione e il preprocessamento dei dati.
+- **LocalizationService API**: Gestisce il deployment e l'esecuzione dei modelli addestrati, restituendo la posizione stimata in base ai dati RSSI in ingresso.
+- **Preprocessing Dashboard (Streamlit)**: Interfaccia che consente di eseguire operazioni di visualizzazione e preprocessamento dei dati, addestramento dei modelli e gestione del loro deployment.
+- **CTGAN**: Basato su architettura **Generative Adversarial Network**, viene utilizzato per generare dati sintetici da dataset reali, ampliando i dati disponibili per migliorare le performance dei modelli di localizzazione.
+- **K-Means e KNN**: Algoritmi utilizzati per il clustering e la classificazione dei dati. K-Means organizza i dati in cluster, mentre KNN viene utilizzato per stimare la posizione dei dispositivi.
 
-3. **Pre-Clustering tramite K-Means**:
-   - Implementazione dell'algoritmo **K-Means** per raggruppare i dati RSSI in cluster omogenei, riducendo la variabilità e migliorando l'efficacia del modello KNN.
+## b) Repositori dei Componenti
 
-4. **Addestramento Ottimale di KNN e Ottimizzazione Parametri**:
-   - Utilizzo dell'algoritmo **K-Nearest Neighbors (KNN)** per la localizzazione indoor. La dashboard include una **ricerca di parametri ottimali** per KNN. Vengono esplorati diversi valori di **k** attraverso procedure di ottimizzazione automatica, selezionando quello che garantisce le migliori performance in termini di accuratezza predittiva.
+- **SmartLocAI Mobile App**: [Link al repository]()
+- **DataService API**: [Link al repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-DataService-IzziBarone.git)
+- **LocalizationService API**: [Link al repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-LocalizationService-IzziBarone)
+- **Preprocessing Dashboard**: Questo repository attuale descrive l'interfaccia principale di gestione dell'intero flusso di preprocessing, addestramento e deployment.
 
-5. **Trilaterazione per il Calcolo della Posizione**:
-   - Integrazione della **trilaterazione** per stimare con precisione la posizione del dispositivo mobile, utilizzando i segnali ricevuti da diversi punti di accesso Wi-Fi e beacon BLE. Questa componente viene utilizzata per puri scopi comparativi.
+## c) Descrizione della Dashboard
 
-6. **Visualizzazione dei Risultati**:
-   - La dashboard offre visualizzazioni interattive e dinamiche dei risultati. Include rappresentazioni 3D dei cluster generati da K-Means, tabelle dei risultati per monitorare la precisione delle stime di posizione e le performance dei modelli.
+La **Processing Dashboard** è il cuore operativo della soluzione, integrando e orchestrando tutte le componenti del sistema. La Dashboard permette di:
 
-7. **Deployment dei Modelli tramite LocalizationService**:
-   - La dashboard permette il **deployment automatico** dei modelli K-Means e KNN utilizzando un'API dedicata ([**LocalizationService**](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-LocalizationService-IzziBarone)). Questo servizio facilita il caricamento, versionamento e utilizzo dei modelli per la localizzazione in tempo reale. I modelli vengono caricati nel sistema per essere richiamati durante la fase di predizione, garantendo che l'applicazione utilizzi sempre le versioni più aggiornate e ottimizzate.
+1. **Visualizzare e Preprocessare i Dati**: I dati raccolti dai dispositivi mobili vengono mostrati in tempo reale con statistiche e grafici interattivi. Puoi eseguire operazioni di pulizia, aggregazione e normalizzazione dei dati.
+   
+2. **Generare Dati Sintetici con CTGAN**: Se il dataset è limitato, puoi utilizzare il modulo di **Data Augmentation** basato su **CTGAN** per ampliare i dati disponibili e migliorare l'addestramento dei modelli.
 
-## Come Iniziare
+3. **Addestrare i Modelli**:
+   - **K-Means**: Suddivide i dati RSSI in cluster omogenei.
+   - **KNN**: Viene addestrato su ciascun cluster per garantire previsioni accurate. La dashboard include un modulo di ottimizzazione automatica del parametro **k** per migliorare la precisione del modello.
+
+4. **Deployment dei Modelli**: Una volta completato l'addestramento, i modelli K-Means e KNN possono essere distribuiti tramite l'API **LocalizationService**, garantendo che i modelli più recenti siano utilizzati per le predizioni in tempo reale.
+
+5. **Monitoraggio e Visualizzazione dei Risultati**: La dashboard offre strumenti di visualizzazione per monitorare le performance dei modelli, come grafici 3D per i cluster K-Means e metriche di accuratezza per i modelli KNN.
+
+---
+
+### Come Iniziare
 
 1. Clona il repository:
    ```bash
@@ -48,6 +60,3 @@ La **Processing Dashboard**, sviluppata in **Streamlit**, è uno strumento avanz
    ```bash
    streamlit run Home.py
    ```
-____
-
-Questa versione della dashboard include funzionalità avanzate come il **deployment automatico** dei modelli tramite API, l'integrazione con **CTGAN** per la generazione di dati sintetici e strumenti per l'ottimizzazione dei modelli di machine learning.
