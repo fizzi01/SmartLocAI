@@ -53,10 +53,5 @@ La **Processing Dashboard** è il cuore operativo della soluzione, integrando e 
 
 2. Installa le dipendenze:
    ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Avvia l'applicazione:
-   ```bash
-   streamlit run Home.py
+   docker compose up -d
    ```
