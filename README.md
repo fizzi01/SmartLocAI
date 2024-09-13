@@ -21,7 +21,7 @@ L'architettura del sistema è modulare e comprende i seguenti componenti chiave:
 
 ## b) Repositori dei Componenti
 
-- **SmartLocAI Mobile App**: [Link al repository]()
+- **SmartLocAI Mobile App**: [Link al repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-SmartLocAI_APP-IzziBarone.git)
 - **DataService API**: [Link al repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-DataService-IzziBarone.git)
 - **LocalizationService API**: [Link al repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-LocalizationService-IzziBarone)
 - **Preprocessing Dashboard**: Questo repository attuale descrive l'interfaccia principale di gestione dell'intero flusso di preprocessing, addestramento e deployment.
