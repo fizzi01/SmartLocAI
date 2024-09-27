@@ -46,7 +46,7 @@ The **Processing Dashboard** is the operational core of the solution, integratin
 
 ### How to start?
 
-1. Clona repository:
+1. Clone repository:
    ```bash
    git clone https://github.com/fizzi01/SmartLocAI.git
    ```
