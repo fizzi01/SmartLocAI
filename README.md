@@ -4,51 +4,51 @@
 
 ![workflow](https://drive.google.com/uc?export=view&id=1X_hAKv6Gfx64jVT-aF3GQcP7hRWn_DOr)
 
-La **Processing Dashboard** è una piattaforma interattiva sviluppata con **Streamlit** che gestisce l'intero flusso di lavoro per la localizzazione indoor, dall'acquisizione e preprocessamento dei dati RSSI, all'addestramento di modelli di machine learning fino alla predizione della posizione dei dispositivi mobili. Questa soluzione sfrutta tecniche avanzate come la **Generative AI**, il **clustering K-Means**, il **K-Nearest Neighbors (KNN)** e la **trilaterazione** per ottenere stime accurate della posizione basate su segnali Wi-Fi e BLE.
+The **Processing Dashboard** is an interactive platform developed with **Streamlit** that manages the entire workflow for indoor localization, from the acquisition and preprocessing of RSSI data, to the training of machine learning models, all the way to predicting the position of mobile devices. This solution leverages advanced techniques such as **Generative AI**, **K-Means clustering**, **K-Nearest Neighbors (KNN)**, and **trilateration** to obtain accurate position estimates based on Wi-Fi and BLE signals.
 
-## a) Architettura del Sistema
+## a) System Architecture
 
 ![architettura](https://drive.google.com/uc?export=view&id=13Cb9Iq9cTK-zhTe3yJ_fPGRLT2n5gV35)
 
-L'architettura del sistema è modulare e comprende i seguenti componenti chiave:
+The system architecture is modular and comprises the following key components:
 
-- **App Mobile SmartLocAI**: Raccoglie dati RSSI da access points Wi-Fi e beacon BLE tramite dispositivi mobili. Invia i dati al **DataService API** per l'elaborazione.
-- **DataService API**: Gestisce la raccolta, l'archiviazione e il preprocessamento dei dati.
-- **LocalizationService API**: Gestisce il deployment e l'esecuzione dei modelli addestrati, restituendo la posizione stimata in base ai dati RSSI in ingresso.
-- **Preprocessing Dashboard (Streamlit)**: Interfaccia che consente di eseguire operazioni di visualizzazione e preprocessamento dei dati, addestramento dei modelli e gestione del loro deployment.
-- **CTGAN**: Basato su architettura **Generative Adversarial Network**, viene utilizzato per generare dati sintetici da dataset reali, ampliando i dati disponibili per migliorare le performance dei modelli di localizzazione.
-- **K-Means e KNN**: Algoritmi utilizzati per il clustering e la classificazione dei dati. K-Means organizza i dati in cluster, mentre KNN viene utilizzato per stimare la posizione dei dispositivi.
+- **CTGAN**: Based on a **Generative Adversarial Network** architecture, it is used to generate synthetic data from real datasets, enhancing the available data to improve the performance of localization models.
+- **K-Means and KNN**: Algorithms used for data clustering and classification. K-Means organizes the data into clusters, while KNN is used to estimate the position of the devices.
+- **SmartLocAI Mobile App**: Collects RSSI data from Wi-Fi access points and BLE beacons through mobile devices. It sends the data to the **DataService API** for processing.
+- **DataService API**: Handles the collection, storage, and preprocessing of the data.
+- **LocalizationService API**: Manages the deployment and execution of trained models, returning the estimated position based on the incoming RSSI data.
+- **Preprocessing Dashboard (Streamlit)**: Interface that allows for data visualization and preprocessing operations, model training, and deployment management.
 
-## b) Repositories dei Componenti
+## b) Component Repositories
 
-- **SmartLocAI Mobile App**: [Link al repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-SmartLocAI_APP-IzziBarone.git)
-- **DataService API**: [Link al repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-DataService-IzziBarone.git)
-- **LocalizationService API**: [Link al repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-LocalizationService-IzziBarone)
-- **Preprocessing Dashboard**: Questo repository attuale descrive l'interfaccia principale di gestione dell'intero flusso di preprocessing, addestramento e deployment.
+- **SmartLocAI Mobile App**: [Repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-SmartLocAI_APP-IzziBarone.git)
+- **DataService API**: [Repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-DataService-IzziBarone.git)
+- **LocalizationService API**: [Repository](https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-LocalizationService-IzziBarone)
+- **Preprocessing Dashboard**: This current repository describes the main interface for managing the entire preprocessing, training, and deployment workflow.
 
-## c) Descrizione della Dashboard
+## c) Dashboard Description
 
-La **Processing Dashboard** è il cuore operativo della soluzione, integrando e orchestrando tutte le componenti del sistema. La Dashboard permette di:
+The **Processing Dashboard** is the operational core of the solution, integrating and orchestrating all system components. The Dashboard allows you to:
 
-1. **Visualizzare e Preprocessare i Dati**: I dati raccolti dai dispositivi mobili vengono mostrati in tempo reale con statistiche e grafici interattivi. Puoi eseguire operazioni di pulizia, aggregazione e normalizzazione dei dati.
+1. **Visualize and Preprocess Data**: The data collected from mobile devices is displayed in real-time with statistics and interactive charts. You can perform data cleaning, aggregation, and normalization operations.
    
-2. **Generare Dati Sintetici con CTGAN**: Se il dataset è limitato, puoi utilizzare il modulo di **Data Augmentation** basato su **CTGAN** per ampliare i dati disponibili e migliorare l'addestramento dei modelli.
+2. **Generate Synthetic Data with CTGAN**: If the dataset is limited, you can use the **Data Augmentation** module based on **CTGAN** to expand the available data and improve model training.
 
-3. **Addestrare i Modelli**:
-   - **K-Means**: Suddivide i dati RSSI in cluster omogenei.
-   - **KNN**: Viene addestrato su ciascun cluster per garantire previsioni accurate. La dashboard include un modulo di ottimizzazione automatica del parametro **k** per migliorare la precisione del modello.
+3. **Train Models**:
+   - **K-Means**: RSSI data clustering.
+   - **KNN**: Trained on each cluster to ensure accurate predictions. The dashboard includes an automatic **k** parameter optimization module to improve model precision.
 
-4. **Deployment dei Modelli**: Una volta completato l'addestramento, i modelli K-Means e KNN possono essere distribuiti tramite l'API **LocalizationService**, garantendo che i modelli più recenti siano utilizzati per le predizioni in tempo reale.
+4. **Deploy Models**: Once training is complete, the K-Means and KNN models can be deployed through the **LocalizationService API**, ensuring that the most recent models are used for real-time predictions.
 
-5. **Monitoraggio e Visualizzazione dei Risultati**: La dashboard offre strumenti di visualizzazione per monitorare le performance dei modelli, come grafici 3D per i cluster K-Means e metriche di accuratezza per i modelli KNN.
+5. **Monitor and Visualize Results**: The dashboard provides visualization tools to monitor model performance, such as 3D charts for K-Means clusters and accuracy metrics for KNN models.
 
 ---
 
-### Come Iniziare
+### How to start?
 
 1. Clona il repository:
    ```bash
-   git clone https://github.com/UniSalento-IDALab-IoTCourse-2023-2024/wot-project-2023-2024-Dashboard-IzziBarone.git
+   git clone https://github.com/fizzi01/SmartLocAI.git
    ```
 
 2. Settings.yml:
@@ -78,7 +78,7 @@ La **Processing Dashboard** è il cuore operativo della soluzione, integrando e 
      kmeans: "kmeans"
      ctgan: "ctgan"
    ```
-3. Generazione credenziali e chiavi:
+3. Credential and Key Generation:
    ```python
    import streamlit_authenticator as stauth
 
@@ -86,7 +86,7 @@ La **Processing Dashboard** è il cuore operativo della soluzione, integrando e 
    print(hashed_passwords)
    ```
 
-5. Installa le dipendenze:
+5. Dependencies:
    ```bash
    docker compose up -d
    ```
