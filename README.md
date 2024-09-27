@@ -42,6 +42,12 @@ The **Processing Dashboard** is the operational core of the solution, integratin
 
 5. **Monitor and Visualize Results**: The dashboard provides visualization tools to monitor model performance, such as 3D charts for K-Means clusters and accuracy metrics for KNN models.
 
+## Brief overview of the results
+We present the results illustrating the performance improvement compared to those obtained using only real data. It is evident that using CTGAN to generate synthetic data—thus augmenting the original dataset for training the models—results in a significant boost in localization precision.
+
+
+![rsults](https://drive.google.com/uc?export=view&id=1DRuEq8EpWZz7_K3JMrONWZT5BHDIWg9_)
+
 ---
 
 ### How to start?
